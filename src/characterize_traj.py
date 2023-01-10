@@ -11,10 +11,15 @@ reachy = ReachySDK('localhost')
 
 def characterize_traj(joint_orders):
     """
-    This function caracterize a trajectory form a list of point to a vector and point tuple.
+    This function characterize a trajectory form a list of point to a vector and point tuple.
     :param joint_orders: list of joints target positions
     :return: a tuple (vector, point)
     """
+    # Parameters of this characterization
+    nb_points = 100  # Number of point's coordinates to use to characterize the trajectory
+    ploy_deg = 3  # Degree of the polynomial used to characterize the trajectory
+
+
     # We need to find the points where the robot release the ball
     release_index = None
     for i in range(len(joint_orders)):
@@ -26,7 +31,7 @@ def characterize_traj(joint_orders):
 
     # Now we want to have the trajectory in robot referential with the direct kinematics function
     traj = []
-    for order in joint_orders[release_index-100:release_index]:
+    for order in joint_orders[release_index-nb_points:release_index]:
         traj.append(reachy.r_arm.forward_kinematics({cle: order[cle] for cle in
                                                      ["r_shoulder_pitch", "r_shoulder_roll", "r_arm_yaw",
                                                       "r_elbow_pitch", "r_forearm_yaw", "r_wrist_pitch",
@@ -47,6 +52,29 @@ def characterize_traj(joint_orders):
     plt.ylim(minax, manax)
     ax.set_zlim(minax, manax)
     plt.show()
+
     # We want to fit a function in this list of coordinates
-    # We'll use a linear regression to do so
+    # We'll use a polynomial regression to do so
+
+    # First passing from X, Y, Z coordinates to x, z
+    x = np.sqrt(X ** 2 + Y ** 2)
+    z = Z
+
+    # Then fitting the polynomial
+    coeffs = np.polyfit(x, z, ploy_deg)
+    ffit = np.poly1d(coeffs)
+    fderiv = ffit.deriv()
+    print("coeffs : ", coeffs, "\nffit : ", ffit, "\nfderiv : ", fderiv)
+
+    # And apply the derivative on the release point
+    release_point = x[-1], z[-1]
+    velocity = fderiv(release_point[0])
+
+    # Show the points and the fitted function
+    plt.plot(x, z, 'o', x, ffit(x), '-')
+    plt.show()
+
+    return velocity, traj[-1]
+
+
 
