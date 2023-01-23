@@ -19,7 +19,6 @@ def characterize_traj_v1(joint_orders):
     nb_points = 100  # Number of point's coordinates to use to characterize the trajectory
     ploy_deg = 3  # Degree of the polynomial used to characterize the trajectory
 
-
     # We need to find the points where the robot release the ball
     release_index = None
     for i in range(len(joint_orders)):
@@ -31,7 +30,7 @@ def characterize_traj_v1(joint_orders):
 
     # Now we want to have the trajectory in robot referential with the direct kinematics function
     traj = []
-    for order in joint_orders[release_index-nb_points:release_index]:
+    for order in joint_orders[release_index - nb_points:release_index]:
         traj.append(reachy.r_arm.forward_kinematics({cle: order[cle] for cle in
                                                      ["r_shoulder_pitch", "r_shoulder_roll", "r_arm_yaw",
                                                       "r_elbow_pitch", "r_forearm_yaw", "r_wrist_pitch",
@@ -126,12 +125,12 @@ def characterize_traj_v2(joint_orders):
     points = [X, Y, Z]
     release_point = X[-1], Y[-1], Z[-1]
     for axe in range(3):
-        coeffs = np.polyfit(points[axe], points[axe+1 % 3], ploy_deg)
+        coeffs = np.polyfit(points[axe], points[axe + 1 % 3], ploy_deg)
         ffit = np.poly1d(coeffs)
         fderiv = ffit.deriv()
         print(axe, ", coeffs : ", coeffs, "\nffit : ", ffit, "\nfderiv : ", fderiv)
         velocity = fderiv(release_point[0])
-        plt.plot(points[axe], points[axe+1 % 3], 'o', points[axe], ffit(points[axe]), '-')
+        plt.plot(points[axe], points[axe + 1 % 3], 'o', points[axe], ffit(points[axe]), '-')
 
     # And apply the derivative on the release point
 
@@ -139,3 +138,8 @@ def characterize_traj_v2(joint_orders):
     plt.show()
     velocity = 0
     return velocity, traj[-1]
+
+
+if __name__ == "__main__":
+    characterize_traj_v2(np.load('../traj/traj_coralie3.npz', allow_pickle=True)["traj"])
+    print("done")
