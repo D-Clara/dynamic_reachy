@@ -16,21 +16,23 @@ def characterize_traj(joint_orders):
     :return: a tuple (vector, point)
     """
     # Parameters of this characterization
-    nb_points = 100  # Number of point's coordinates to use to characterize the trajectory
+    nb_points = 25  # Number of point's coordinates to use to characterize the trajectory
     ploy_deg = 3  # Degree of the polynomial used to characterize the trajectory
 
 
     # We need to find the points where the robot release the ball
     release_index = None
-    for i in range(len(joint_orders)):
-        if joint_orders[i]["r_gripper"] >= -12:
-            release_index = i
+    for i in range(len(joint_orders)-600):
+        if joint_orders[600+i]["r_gripper"] < -12:
+            release_index = i+600
             break
     if release_index is None:
         raise ValueError("No release point found in trajectory")
 
     # Now we want to have the trajectory in robot referential with the direct kinematics function
     traj = []
+    print(len(joint_orders))
+    print(release_index)
     for order in joint_orders[release_index-nb_points:release_index]:
         traj.append(reachy.r_arm.forward_kinematics({cle: order[cle] for cle in
                                                      ["r_shoulder_pitch", "r_shoulder_roll", "r_arm_yaw",
@@ -77,4 +79,6 @@ def characterize_traj(joint_orders):
     return velocity, traj[-1]
 
 
-
+if __name__=="__main__":
+    characterize_traj(np.load('../traj/traj_coralie3.npz', allow_pickle=True)["traj"])
+    print("done")
