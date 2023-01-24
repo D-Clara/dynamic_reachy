@@ -1,19 +1,22 @@
 import numpy as np
 import time
+import datetime
 
 from reachy_sdk import ReachySDK
 
 from reachy_sdk.trajectory import goto
 from reachy_sdk.trajectory.interpolation import InterpolationMode
 
-
+# Global variables
 RECORD_FREQUENCY = 100
 SAVE_DIRECTORY_PATH = '../traj/'
-FILENAME = 'test'
 
+# traj filenames generator
+FILENAME_COMMENT = 'petitmvt'
+FILENAME_PREFIX = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+FILENAME_SUFFIX = '.npz'
 
 reachy = ReachySDK('localhost')
-
 
 
 def is_pose_reachable(self, pose, is_left_arm=True, precision=0.005, verbose=True):
@@ -39,7 +42,7 @@ def is_pose_reachable(self, pose, is_left_arm=True, precision=0.005, verbose=Tru
             joints = {joint: pos for joint, pos in zip(self.reachy.r_arm.joints.values(), angles)}
         # Testing if the forward kinematics matches
         for iy, ix in np.ndindex(pose.shape):
-            if (abs(pose[iy, ix]-real_pose[iy, ix]) > precision):
+            if abs(pose[iy, ix] - real_pose[iy, ix]) > precision:
                 if verbose:
                     self.get_logger().warning(f"Unreachable pose: {pose}")
                 return False, joints
@@ -49,7 +52,7 @@ def is_pose_reachable(self, pose, is_left_arm=True, precision=0.005, verbose=Tru
             limits = self.angle_limits[j.name]
             if verbose:
                 self.get_logger().warning(f"angle limits of {j.name}={limits}")
-            angle = joints[j]*math.pi/180.0
+            angle = joints[j]*np.pi/180.0
             valid = self.is_valid_angle(angle, limits)
             if not valid:
                 if verbose:
@@ -62,12 +65,11 @@ def is_pose_reachable(self, pose, is_left_arm=True, precision=0.005, verbose=Tru
     return True, joints
 
 
-
 def get_positions():
-    '''
-    Get the current position of the joints 
+    """
+    Get the current position of the joints
     :return a dict with the joint name and the current position
-    '''
+    """
 
     items = dict((v,k.present_position) for v, k in reachy.joints.items())
     items = {cle: items[cle] for cle in reachy.r_arm.joints.keys()}
@@ -77,16 +79,16 @@ def get_positions():
     return new_dict
 
 
-def record_trajectory(string filename):
-    '''
+def record_trajectory(filename):
+    """
     Record the trajectory of the arm and save it in a file
     :param filename: the name of the file to save the trajectory
-    '''
+    """
     traj = []
     pos = []
     goal = []
 
-    while(True):
+    while True:
         try:
             traj.append(get_positions())
             pos.append([joint.present_position for name, joint in reachy.r_arm.joints.items()])
@@ -100,4 +102,4 @@ def record_trajectory(string filename):
 
 
 if __name__ == "__main__":
-    record_trajectory(FILENAME)
+    record_trajectory(FILENAME_PREFIX+'_'+FILENAME_COMMENT+FILENAME_SUFFIX)
