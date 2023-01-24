@@ -75,7 +75,7 @@ def characterize_traj_v1(joint_orders):
     plt.plot(x, z, 'o', x, ffit(x), '-')
     plt.show()
 
-    return velocity, traj[-1]
+    return velocity, [X[-1], Y[-1], Z[-1]]
 
 
 def characterize_traj_v2(joint_orders):
