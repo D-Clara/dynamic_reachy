@@ -12,8 +12,8 @@ FILENAME = 'test'
 reachy = ReachySDK('localhost')
 
 
-def ploat_trajectory(filename):
-    '''Ploat a trajectory from a file
+def plot_trajectory(filename):
+    '''Plot a trajectory from a file
     :param filename: the name of the file to read
     '''
 
@@ -67,4 +67,4 @@ def ploat_trajectory(filename):
 
 if __name__ == '__main__':
     filename = SAVE_DIRECTORY_PATH + FILENAME + '.npz'
-    print_trajectory(filename)
+    plot_trajectory(filename)
