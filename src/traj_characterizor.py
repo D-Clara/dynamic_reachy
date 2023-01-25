@@ -2,6 +2,7 @@
 # we need to characterize the trajectories.
 # To do so, we'll need to define a trajectory with a vector and a throw point.
 
+# A ameliorer :
 # On regarde à partir du 600e pt de la traj pour trouver le pt de relachement
 
 import numpy as np
@@ -18,6 +19,7 @@ class TrajectoryCharacterizor:
         self.X = None
         self.Y = None
         self.Z = None
+        self.time = np.arange(nb_points)
         self.coeffs = None
         self.ffit = None
         self.fderiv = None
@@ -44,9 +46,8 @@ class TrajectoryCharacterizor:
 
     def plot_3d_trajectory(self):
         if self.X is None:
-            if self.release_index is None:
-                self.__find_release_index()
-            self.__joints_to_cartesian()
+            print("You need to process the trajectory first")
+            return
         fig = plt.figure()
         ax = fig.add_subplot(projection='3d')
         ax.scatter(self.X, self.Y, self.Z, label='Courbe')
@@ -60,35 +61,35 @@ class TrajectoryCharacterizor:
         plt.show()
 
     def __fit_polynomial(self):
-        self.coeffs = np.polyfit(self.X, self.Y, self.ply_deg), np.polyfit(self.X, self.Z, self.ply_deg)
-        self.ffit = np.poly1d(self.coeffs[0]), np.poly1d(self.coeffs[1])
-        self.fderiv = self.ffit[0].deriv(), self.ffit[1].deriv()
+        self.coeffs = (np.polyfit(self.time, self.X, self.ply_deg),  # X=f(t)
+                       np.polyfit(self.time, self.Y, self.ply_deg),  # Y=f(t)
+                       np.polyfit(self.time, self.Z, self.ply_deg))  # Z=f(t)
+        self.ffit = (np.poly1d(self.coeffs[0]),
+                     np.poly1d(self.coeffs[1]),
+                     np.poly1d(self.coeffs[2]))
+        self.fderiv = (self.ffit[0].deriv(),
+                       self.ffit[1].deriv(),
+                       self.ffit[2].deriv())
         return self.coeffs
 
     def plot_fitted_curve(self):
-        plt.plot(self.X, self.Y, 'o', self.X, self.ffit[0](self.X), 'r-')
-        plt.axis('scaled')
-        plt.title('y=f1(x)')
+        if self.X is None or self.ffit is None:
+            print("You need to process the trajectory first")
+            return
+        plt.plot(self.time, self.X, 'o', self.time, self.ffit[0](self.time), 'r-')
+        # plt.axis('scaled')
+        plt.title('X=f1(t)')
         plt.show()
 
-        plt.plot(self.X, self.Z, 'o', self.X, self.ffit[1](self.X), 'r-')
-        plt.axis('scaled')
-        plt.title('z=f2(x)')
+        plt.plot(self.time, self.Y, 'o', self.time, self.ffit[1](self.time), 'r-')
+        # plt.axis('scaled')
+        plt.title('Y=f1(t)')
         plt.show()
 
-        # fig = plt.figure()
-        # ax = fig.add_subplot(projection='3d')
-        # ax.scatter(self.X, self.Y, self.Z, label='Coords')
-        # ax.plot(self.X, self.ffit[0](self.X), self.Z, 'r-', label='FFunc')
-        # ax.plot(self.X, self.Y, self.ffit[1](self.X), 'b-', label='FFunc')
-        # minax = min([min(self.X), min(self.Y), min(self.Z)])
-        # manax = max([max(self.X), max(self.Y), max(self.Z)])
-        # manax += 0.1
-        # minax -= 0.1
-        # plt.xlim(minax, manax)
-        # plt.ylim(minax, manax)
-        # ax.set_zlim(minax, manax)
-        # plt.show()
+        plt.plot(self.time, self.Z, 'o', self.time, self.ffit[2](self.time), 'r-')
+        # plt.axis('scaled')
+        plt.title('Z=f1(t)')
+        plt.show()
 
     def process(self):
         self.__find_release_index()
@@ -97,11 +98,11 @@ class TrajectoryCharacterizor:
         self.__fit_polynomial()
         # self.plot_fitted_curve()
         release_point = self.X[-1], self.Y[-1], self.Z[-1]
-        print("Release point: ", release_point)
+        # print("Release point: ", release_point)
         print(self.fderiv[0])
-        print("X.shape :", self.X.shape)
-        print("ffit", self.ffit[0](self.X).shape)
-        velocity = self.fderiv[0](release_point[0]), self.fderiv[1](release_point[0])
+        # print("X.shape :", self.X.shape)
+        # print("ffit", self.ffit[0](self.X).shape)
+        velocity = self.fderiv[0](self.time[-1]), self.fderiv[1](self.time[-1]), self.fderiv[2](self.time[-1])
         return velocity, release_point
 
 
@@ -119,7 +120,9 @@ if __name__ == "__main__":
 
     t = TrajectoryCharacterizor(joint_orders=np.load('../traj/traj_coralie3.npz', allow_pickle=True)["traj"],
                                 nb_points=25,
-                                ply_deg=2)
+                                ply_deg=3)
+    v, pt = t.process()
     t.plot_3d_trajectory()
-    t.process()
     t.plot_fitted_curve()
+    print("Velocity: ", v)
+    print("Release point: ", pt)
