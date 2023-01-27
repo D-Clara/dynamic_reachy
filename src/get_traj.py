@@ -12,12 +12,18 @@ RECORD_FREQUENCY = 100
 SAVE_DIRECTORY_PATH = '../traj/'
 
 # traj filenames generator
-FILENAME_COMMENT = 'petitmvt'
-FILENAME_PREFIX = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-FILENAME_SUFFIX = '.npz'
+FILENAME_COMMENT = 'test'
+FILENAME_PREFIX = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
 
-reachy = ReachySDK('localhost')
 
+
+saving = False
+goal = []
+
+def is_saving():
+    global saving
+    print("ohh : ", saving)
+    return saving
 
 def is_pose_reachable(self, pose, is_left_arm=True, precision=0.005, verbose=True):
     """
@@ -70,13 +76,22 @@ def get_positions():
     Get the current position of the joints
     :return a dict with the joint name and the current position
     """
-
+    
     items = dict((v,k.present_position) for v, k in reachy.joints.items())
     items = {cle: items[cle] for cle in reachy.r_arm.joints.keys()}
     new_dict = {}
     for cle in items.keys():    
         new_dict[cle] = items[cle]
     return new_dict
+
+
+def add_goal(element):
+    """
+    Add a goal to the trajectory
+    """
+    global goal
+    goal.append(element)
+    
 
 
 def record_trajectory(filename):
@@ -86,15 +101,18 @@ def record_trajectory(filename):
     """
     traj = []
     pos = []
-    goal = []
-
+    global goal
+    global saving
+    saving = True
     while True:
         try:
+            print(saving, is_saving())
             traj.append(get_positions())
             pos.append([joint.present_position for name, joint in reachy.r_arm.joints.items()])
-            goal.append([joint.goal_position for name, joint in reachy.r_arm.joints.items()])
+            #goal.append([joint.goal_position for name, joint in reachy.r_arm.joints.items()])
             time.sleep(1/RECORD_FREQUENCY)
         except KeyboardInterrupt:
+            saving = False
             print("End of recording")
             filePath = SAVE_DIRECTORY_PATH + filename + '.npz'
             np.savez_compressed(filePath, traj=traj, pos=pos, goal=goal)
@@ -102,4 +120,7 @@ def record_trajectory(filename):
 
 
 if __name__ == "__main__":
-    record_trajectory(FILENAME_PREFIX+'_'+FILENAME_COMMENT+FILENAME_SUFFIX)
+    reachy = ReachySDK('reachy.local')
+    print("You're traj file will be saved in: ")
+    print(SAVE_DIRECTORY_PATH+FILENAME_PREFIX+'_'+FILENAME_COMMENT+'.npz')
+    record_trajectory(FILENAME_PREFIX+'_'+FILENAME_COMMENT)
