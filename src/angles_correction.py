@@ -16,10 +16,22 @@ def actif_angles_correction_empty_hand(shoulder_angle, elbow_angle, init_torque_
     m_arm = 0.6
     shoulder_torque = -g*((m_arm * l_arm/2+ m_forearm * l_arm)*np.sin(shoulder_angle * np.pi/180) + m_forearm * l_forearm/2 *np.sin((shoulder_angle + elbow_angle) * np.pi/180))
     elbow_torque = -g * m_forearm *l_forearm/2 * np.sin((shoulder_angle + elbow_angle) * np.pi/180)
-    # shoulder_angle += -0.86139*shoulder_torque+0.348547*sign(shoulder_angle)
-    shoulder_angle += -0.8298166*shoulder_torque
-    # elbow_angle += -1.54423*elbow_torque-0.504432
-    elbow_angle += -1.945815*elbow_torque-0.0394932
+    shoulder_angle += -0.86139*shoulder_torque+0.348547*sign(shoulder_angle)
+    elbow_angle += -1.54423*elbow_torque-0.504432
+    return [shoulder_angle, elbow_angle]
+
+def actif_angles_correction_no_empty_hand(shoulder_angle, elbow_angle, init_torque_shoulder=1.5, init_torque_elbow=0.5):
+    if elbow_angle > 0:
+        elbow_angle = 0
+    g = 9.81
+    l_forearm = 0.36
+    l_arm = 0.293
+    m_forearm = 0.6
+    m_arm = 0.6
+    shoulder_torque = -g*((m_arm * l_arm/2+ m_forearm * l_arm)*np.sin(shoulder_angle * np.pi/180) + m_forearm * l_forearm *np.sin((shoulder_angle + elbow_angle) * np.pi/180))
+    elbow_torque = -g * m_forearm *l_forearm * np.sin((shoulder_angle + elbow_angle) * np.pi/180)
+    shoulder_angle += -0.86139*shoulder_torque+0.348547*sign(shoulder_angle)
+    elbow_angle += -1.54423*elbow_torque-0.504432
     return [shoulder_angle, elbow_angle]
 
 if __name__ == '__main__':
