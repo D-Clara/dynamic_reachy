@@ -44,7 +44,7 @@ It is not possible to control the reachy arm directly with the torques. The meth
 To determine this relationship, for each motor and for different angles and initial torques, the objective is to turn the motor by 10°. Increasingly large arm movements arm movements are made until the desired value is reached and the gap between desired angle and angle to give are collected.
 
 This video illuste one acquisition of data for the elbow motor:
-![torque_eval](../images/torque_evaluation.gif)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/vUewnhDwyfs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### Elbow motor
 
@@ -72,7 +72,7 @@ To evaluate the results, for each motor, sequences of 10 small angle movements o
 To obtain the error of the compensation, *elbow_error_evaluate* and *shoulder_error_evaluate* need to be used with the compensated angle as a parameter.
 
 One part of a test for shoulder motor is showed in this video:
-![test](../images/test.gif)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/U-W5hRrXUCg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
 **All data for pratical application are include in the [document](../images/torques.ods).**
