@@ -2,7 +2,7 @@ import time
 import numpy as np
 from reachy_sdk import ReachySDK
 from reachy_sdk.trajectory import goto
-from angles_correction import actif_angles_correction_empty_hand
+from angles_correction import actif_angles_correction
 
 reachy = ReachySDK('localhost')
 
@@ -64,7 +64,7 @@ def manual_goto_angles_correction(goal_pos, duration):
     goal = []
 
     for i in range(number_of_points):
-        a = actif_angles_correction_empty_hand(all_pos[0][i],all_pos[3][i])
+        a = actif_angles_correction(all_pos[0][i],all_pos[3][i])
         all_pos[0][i] = a[0]
         all_pos[3][i] = a[1]
 
