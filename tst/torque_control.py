@@ -13,11 +13,11 @@ sys.path.append(os.path.abspath("/home/reachy/dynamic_reachy/src"))
 from angles_correction import actif_angles_correction_empty_hand, actif_angles_correction_no_empty_hand 
 
 reachy = ReachySDK('localhost')
-init_pos = [-45.0, 0.0, 0.0, -45.0, 0.0, 0.0, 0.0, -10.40]
-pos = [init_pos[0]-10, 0.0, 0.0, init_pos[3], 0.0, 0.0, 0.0, -10.40]
+init_pos = [-0.0, 0.0, 0.0, -45.0, 0.0, 0.0, 0.0, -10.40]
+pos = [init_pos[0], 0.0, 0.0, init_pos[3]-10, 0.0, 0.0, 0.0, -10.40]
 
 final_pos = np.copy(pos)
-final_pos[0]=actif_angles_correction_no_empty_hand(pos[0], pos[3])[0]
+# final_pos[0]=actif_angles_correction_no_empty_hand(pos[0], pos[3])[0]
 # final_pos[3]=actif_angles_correction_empty_hand(pos[0], pos[3])[1]
 # final_pos[0]=-60.3547
 
@@ -96,10 +96,10 @@ def error_evaluate_shoulder():
 
 
    
-# find_position_for_torque_shoulder()
-print(final_pos)
-print(init_pos)
+find_position_for_torque_elbow()
+# print(final_pos)
+# print(init_pos)
 # time.sleep(2)
-error_evaluate_shoulder()
+# error_evaluate_shoulder()
 
 
