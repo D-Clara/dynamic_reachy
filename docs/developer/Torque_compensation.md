@@ -9,11 +9,11 @@ with $\theta_1$ and $\theta_2$ positive
 Torque due to the weight on the elbow motor
 </span>
 
-$\Tau_2=  \overrightarrow{O_1P_2} \wedge \overrightarrow{P_2}$
+$\tau_2=  \overrightarrow{O_1P_2} \wedge \overrightarrow{P_2}$
 
-$\Tau_2=  \frac{l_2}{2}. \overrightarrow{x_2} \wedge m_2 g.\overrightarrow{x_0}$
+$\tau_2=  \frac{l_2}{2}. \overrightarrow{x_2} \wedge m_2 g.\overrightarrow{x_0}$
 
-$\Tau_2=  \frac{l_2}{2} m_2 g.\overrightarrow{z_0}$
+$\tau_2=  \frac{l_2}{2} m_2 g.\overrightarrow{z_0}$
 
 <span style="color: #7ECBB7">
 Center of mass of the whole arm
@@ -29,9 +29,9 @@ $\overrightarrow{O_0P} =  \frac{1}{m_1 + m_2} (((m_1 \frac{l_1}{2} + m_2 l_1) \c
 Torque due to the weight on the shoulder motor
 </span>
 
-$\Tau_1 =  \overrightarrow{O_0P} \wedge \overrightarrow{P}$
+$\tau_1 =  \overrightarrow{O_0P} \wedge \overrightarrow{P}$
 
-$\Tau_1 =  g((m_1 \frac{l_1}{2} + m_2 l_1) \sin{(\theta_1)} + \frac{l_2}{2} m_2 \sin{(\theta_1 + \theta_2)}). \overrightarrow{z_0}$ 
+$\tau_1 =  g((m_1 \frac{l_1}{2} + m_2 l_1) \sin{(\theta_1)} + \frac{l_2}{2} m_2 \sin{(\theta_1 + \theta_2)}). \overrightarrow{z_0}$ 
 
 <br/>
 
@@ -44,16 +44,18 @@ It is not possible to control the reachy arm directly with the torques. The meth
 To determine this relationship, for each motor and for different angles and initial torques, the objective is to turn the motor by 10°. Increasingly large arm movements arm movements are made until the desired value is reached and the gap between desired angle and angle to give are collected.
 
 This video illuste one acquisition of data for the elbow motor:
-<iframe width="560" height="315" src="https://www.youtube.com/embed/vUewnhDwyfs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+https://user-images.githubusercontent.com/74452893/217071843-9d4e4f5d-e662-413b-b864-dcdaed446088.mp4
 
 ### Elbow motor
 
 To obtain the gap between desired angle and angle to give, *find_position_for_elbow_torque* need to be used.
 
 This graph has been obtained:
+
 ![elbow](../images/graph_elbow.png)
 
-$eps_{elbow} = -1.54423*\Tau_{elbow}-0.504432$
+$eps_{elbow} = -1.54423*\tau_{elbow}-0.504432$
 
 
 ### Shoulder motor
@@ -61,9 +63,10 @@ $eps_{elbow} = -1.54423*\Tau_{elbow}-0.504432$
 To obtain the gap between desired angle and angle to give, *find_position_for_shoulder_torque* need to be used.
 
 This graph has been obtained:
+
 ![shoulder](../images/graph_shoulder.png)
 
-$eps_{shoulder} = -0.86139*\Tau_{shoulder} + 0.348547*sign(\theta_{shoulder})$
+$eps_{shoulder} = -0.86139*\tau_{shoulder} + 0.348547*sign(\theta_{shoulder})$
 
 
 ### Tests
@@ -72,7 +75,8 @@ To evaluate the results, for each motor, sequences of 10 small angle movements o
 To obtain the error of the compensation, *elbow_error_evaluate* and *shoulder_error_evaluate* need to be used with the compensated angle as a parameter.
 
 One part of a test for shoulder motor is showed in this video:
-<iframe width="560" height="315" src="https://www.youtube.com/embed/U-W5hRrXUCg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+https://user-images.githubusercontent.com/74452893/217072010-5d00ea56-0097-4767-8c16-d345bbe48841.mp4
 
 
 **All data for pratical application are include in the [document](../images/torques.ods).**
