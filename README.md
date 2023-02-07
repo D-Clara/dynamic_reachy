@@ -1,26 +1,35 @@
-# Name of my project
+# Dynamic Reachy
 
-**Description:** Template for deliverables of robotics projects at Bordeaux-INP.
-Replace this description by a sentence summarizing your project.
+**Description:** Using teleoperation with VR headset and dynamic control to plan precise movements, 
+in the context of a ball launch with the **Reachy** robot from __[Pollen Robotics](https://www.pollen-robotics.com/)__.
 
-<img src="https://via.placeholder.com/900x300.png?text=Video+illustrating+your+project,+or+picture"> 
+<img alt="" src="docs/images/reachy.jpg"> 
 
 [📖 User documentation](docs/user) • [👨‍💻 Developer documentation](docs/developer) • [📈 Project report](docs/report) • [📚 Bibliography](docs/bibliography) • [⚠️ Risk Analysis](docs/risk)
   
 ## 📄 This project in short
-This paragraph is for the visitors who fly over your work and cannot read the whole documentation. They dislike long texts.
+With the final demonstration idea of a robot unbeatable at beer pong, this project aim to meliorate the dynamic 
+behaviour of the robot Reachy.
 
-Be **concise** and **convincing** to show the potential of your project. Be **honest** and list the limitations.  
+We also worked on the treatment and characterization of trajectories, with the initial aim of making Reachy able to learn 
+and generate his own trajectories, thanks to a database made with VR teleoperation.
 
-* The context and the intented users
-* The problems solved by your projects
-* How it solves them
+The search of precision in the reproduction of a movement led us to study the PID parameters of the robot, and 
+constraints such as the torque from gravity applied on the joints.
+
+In parallel, the need of reproducibility for the repetition of one trajectory brought us to search about the causes of 
+these different behaviours with the same order.
 
 ## 🚀 Quickstart (if relevant)
 
-* **Install instructions**: List of software/hardware dependencies, and instructions to install them if relevant
-* **Launch instructions**: Few lines of code to launch the main feature of your project
-
+* **Install instructions**: Everything is already installed on the Intel NUC of Reachy
+* **Launch instructions**: To launch correctly the robot, you must do those few steps :
+  * Turn on the motors switch on the back (see our repairs on the robot to find them)
+  * Turn on Reachy's Intel NUC with the button on the back
+  * On ssh (or on the terminal of the NUC), launch the following commands :
+    * `cd ~/dynamic_reachy`
+    * `source devel/setup.bash`
+    * `roslaunch reachy_bringup reachy.launch`
 If this is written in user or dev docs, provide links.
 
 ## 🔍 About this project
