@@ -11,22 +11,21 @@ We tried to find the problem based on the symptoms:
 After comparing Reachy's information with the robot's electrical diagrams, we concluded that the problem came from the diode that connects the robot's power supply to the input tension in the left arm (D6 in the diagram).
 
 <div align="center"><figure>
-  <img src="/home/reachy/dynamic_reachy/docs/images/power_supply_board_schematic-1.png"> 
+  <img src="../images/power_supply_board_schematic-1.png"> 
   <figcaption>Electric diagram before modifications</figcaption>
 </figure></div>
-
 
 
 As this diode was not easily accessible and we did not have a diode with same caracteristics (5A and 100V), we decided to add two diodes (diode 1N5822 : 3A and 40V) to accessible points on the board that correspond to the same ends of the diode D6.
 This solution bypassed the on/off switch for the motors, which is useful during robot manipulation. We therefore decided to add a new switch before the diode to be able to turn off the right arm motors anyway.
 
 <div align="center"><figure>
-  <img src="/home/reachy/dynamic_reachy/docs/images/power_supply_board_pcb_3-1.png"> 
+  <img src="../images/power_supply_board_pcb_3-1.png"> 
   <figcaption>Electric diagram after modifications</figcaption>
 </figure></div>
 
 <div align="center"><figure>
-  <img src="/home/reachy/dynamic_reachy/docs/images/diodes.jpg"> 
+  <img src="../images/diodes.jpg"> 
   <figcaption>Picture of the repair</figcaption>
 </figure></div>
 
@@ -39,6 +38,11 @@ We found several problems with Reachy's left arm.
 First, there was a 45-degree error on a shoulder joint. A piece had been changed at that location the previous year, so we concluded that the motor had been mispositioned. So we simply disassembled the robot's arm, repositioned the motor, which solved this first problem.
 After some manipulation of the left arm, we noticed some unpredictable and fairly violent parasitic movements. This problem was caused by a software problem that was fixed by updating the code.
 
+<div align="center"><figure>
+  <img src="../images/left_arm.jpg"> 
+  <figcaption>Left arm before and </figcaption>
+</figure></div>
+
 
 ## Hands
 
@@ -46,7 +50,7 @@ The supposed fixed part of the hand was loose which could affect the repeatabili
 
 
 <div align="center"><figure>
-  <img src="/home/reachy/dynamic_reachy/docs/images/reachy_hand.jpg"> 
+  <img src="../images/reachy_hand.jpg"> 
   <figcaption>Sensor level of the hand</figcaption>
 </figure></div>
 

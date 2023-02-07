@@ -7,11 +7,15 @@ import datetime
 from reachy_sdk.trajectory import goto
 from reachy_sdk.trajectory.interpolation import InterpolationMode
 
-#pid = [[25,0,0],[45,0,0],[0.1,0,0],[0.5,0,0],[40,0,0],[32,0,0],[32,0,0]]
-#pid = [[64,10,100],[64,10,100],[64,10,100],[64,10,100],[64,10,100],[64,10,100],[64,10,100]]
-#pid = [[20,0,0],[20,0,0],[20,0,0],[20,0,0],[20,0,0],[20,0,0],[20,0,0]]
-#pid = [[64,0,0],[64,0,0],[64,0,0],[64,0,0],[64,0,0],[64,0,0],[64,0,0]]
-PID = [[64,0,0],[64,0,0],[64,0,0],[150,0,0],[64,0,0],[64,0,0],[64,0,0]]
+#PID = [[25,0,0],[45,0,0],[0.1,0,0],[0.5,0,0],[40,0,0],[32,0,0],[32,0,0]]
+# PID = [[64,10,100],[64,10,100],[64,10,100],[64,10,100],[64,10,100],[64,10,100],[64,10,100]]
+#PID = [[20,0,0],[20,0,0],[20,0,0],[20,0,0],[20,0,0],[20,0,0],[20,0,0]]
+#PID = [[64,0,0],[64,0,0],[64,0,0],[64,0,0],[64,0,0],[64,0,0],[64,0,0]]
+# PID = [[64,0,0],[64,0,0],[64,0,0],[150,0,0],[64,0,0],[64,0,0],[64,0,0]]
+# PID = [[32,0,0],[32,0,0],[32,0,0],[30,0,0],[1,1,32],[32,0,0],[1,1,32]]
+# PID = [[10,0,0],[60,10,200],[60,10,200],[60,10,200],[60,10,200],[20,0,0],[20,0,0]]
+# PID = [[64,10,100],[64,10,100],[64,10,100],[60,10,100],[60,10,200],[20,0,0],[20,0,0]]
+PID = [[64,10,100],[64,10,100],[20,0,0],[64,10,100],[20,0,0],[20,0,0],[20,0,0]]
 
 ERR = []
 JS = []
@@ -32,9 +36,10 @@ def error(filename):
     reachy.r_arm.r_elbow_pitch.pid = (PID[3][0], PID[3][1], PID[3][2])
     reachy.r_arm.r_forearm_yaw.pid = (PID[4][0], PID[4][1], PID[4][2])
     reachy.r_arm.r_wrist_pitch.pid = (PID[5][0], PID[5][1], PID[5][2])
-    reachy.r_arm.r_wrist_roll.pid = (PID[6][0], PID[6][1], PID[6][2])
+    reachy.r_arm.r_wrist_roll.pid = (1.0, 1.0, 32.0, 32.0)
+    reachy.r_arm.r_gripper.pid = (1.0, 1.0, 32.0, 32.0)
 
-    time.sleep(0.1)
+    time.sleep(2)
 
     for j in reachy.r_arm.joints.values():
         print(f"{j.name}: PID={j.pid}")
@@ -74,7 +79,7 @@ def error(filename):
 
 #save data
 now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-name = '2023-02-01_16:14:07_test'
+name = '2023-01-30_17:41:16_test'
 error('/home/reachy/dynamic_reachy/traj/'+name+'.npz')
 np.save('/home/reachy/dynamic_reachy/tst/log_pid/err_{}_{}'.format(now,name), ERR)
 np.save('/home/reachy/dynamic_reachy/tst/log_pid/pos_{}_{}'.format(now,name), JS)
@@ -83,13 +88,14 @@ np.save('/home/reachy/dynamic_reachy/tst/log_pid/pid_{}_{}'.format(now,name), PI
 #plot error
 plt.figure()    
 x=np.linspace(0,1,len(ERR))
+print(np.mean([array[0] for array in ERR]))
 plt.plot(x,[array[0] for array in ERR], label='shoulder_pitch')
-# plt.plot(x,[array[1] for array in ERR], label='shoulder_roll')
-# plt.plot(x,[array[2] for array in ERR], label='arm_yaw')
+plt.plot(x,[array[1] for array in ERR], label='shoulder_roll')
+plt.plot(x,[array[2] for array in ERR], label='arm_yaw')
 plt.plot(x,[array[3] for array in ERR], label='elbow_pitch')
-# plt.plot(x,[array[4] for array in ERR], label='forearm_yaw')
-# plt.plot(x,[array[5] for array in ERR], label='wrist_pitch')
-# plt.plot(x,[array[6] for array in ERR], label='wrist_roll')
-# plt.plot(x,[array[7] for array in ERR], label='grip')
+plt.plot(x,[array[4] for array in ERR], label='forearm_yaw')
+plt.plot(x,[array[5] for array in ERR], label='wrist_pitch')
+plt.plot(x,[array[6] for array in ERR], label='wrist_roll')
+plt.plot(x,[array[7] for array in ERR], label='grip')
 plt.legend()
 plt.show()
