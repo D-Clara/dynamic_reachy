@@ -14,9 +14,11 @@ for i in range(50):
 print(motor_id)
 ids = dxl_io.scan(motor_id)
 
-while True:
-    print(dxl_io.get_present_position(ids))
-    time.sleep(1)
+# while True:
+#     print(dxl_io.get_present_position(ids))
+#     time.sleep(1)
+
+dxl_io.set_goal_position({motor_id[0]: 0})
 
 # dxl_io.set_joint_mode(motor_id)
 # for i in range(10):

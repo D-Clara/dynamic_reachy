@@ -1,0 +1,86 @@
+<head>
+  <title>Reachy API</title>
+  <style>
+    .title {
+      margin-top: 5%;
+      margin-bottom: -5%;
+      font-size: 48px;
+      font-weight: bold;
+      color: #e74848;
+      margin-bottom: 50px;
+      text-shadow: 1px 1px 2px #ffe7e7;
+      text-decoration: wavy;
+      background-color: #ffd4d4;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    }
+
+    a {
+      text-decoration: none;
+      color: #e74848;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        background-image: url(https://cdn-images-1.medium.com/max/1200/1*Pcdv8l12TvKVdyJFmdUjCQ.gif);
+        background-size: cover;
+        opacity: 0.7;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .row1 {
+      margin-top: 5%;
+    }
+
+    .row2 {
+      margin-top: 0%;
+    }
+
+    button {
+      width: 100px;
+      height: 100px;
+      padding: 10px 20px;
+      background-color: #e74848;
+      border: 5px solid #ffe7e7;
+      border-radius: 50%;
+      font-size: 32px;
+      font-weight: bold;
+      color: #ffe7e7;
+      margin: 10px;
+    }
+
+    button:hover {
+      background-color: #ffd4d4;
+      color: #e74848;
+      cursor: pointer;
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    }
+  </style>
+</head>
+
+
+<form method="post">
+    <div class="container">
+        <div class="title"><a href="https://www.pollen-robotics.com/"> Reachy, the unbeatable Beer-Pongiste </div>
+        <div class="row row1">
+            <button type="submit" name="param" value="6">6</button>
+        </div>
+        <div class="row row2">
+            <button type="submit" name="param" value="4">4</button>
+            <button type="submit" name="param" value="5">5</button>
+        </div>
+        <div class="row row3">
+            <button type="submit" name="param" value="1">1</button>
+            <button type="submit" name="param" value="2">2</button>
+            <button type="submit" name="param" value="3">3</button>
+        </div>
+    </div>
+</form>
