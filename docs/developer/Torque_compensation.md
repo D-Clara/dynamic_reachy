@@ -83,4 +83,4 @@ https://user-images.githubusercontent.com/74452893/217072010-5d00ea56-0097-4767-
 
 ## Usage
 
-To correct angles to compensate the weight, the function *actif_angles_correction* in angles_correction.py need to be used. It takes in parameter desired shoulder angle, desired elbow angle and if the hand is empty or not. It return the shoulder and elbow angles that that must be given to compensate.  
+To correct angles to compensate the weight, the function *actif_angles_correction* in angles_correction.py need to be used. It takes in parameter desired shoulder angle, desired elbow angle, if the hand is empty or not and if necessary the weight of the object in the hand. It return the shoulder and elbow angles that that must be given to compensate.  
