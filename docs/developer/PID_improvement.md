@@ -6,7 +6,7 @@
 First steps
 </span>
 
-To get started with PIDs, a methode to discovered the impact was done. It consiste to done small repetitive mouvement and see shaking and the average of errors to reach the extreme positions. This is done in pid_motor_test.py with *error*.
+To get started with PIDs, a methode to discovered the impact was done. It consiste to do small repetitive mouvement and see shaking and the average of errors to reach the extreme positions. This is done in pid_motor_test.py with *error*.
 
 <span style="color: #7ECBB7">
 Problem with the 2 wrist motors
@@ -36,7 +36,9 @@ We try to use the Ziegler and Nichols methode but it was not sucessful.
 Study of step response 
 </span>
 
-A command in position is sent to the motor and we watch its step response with the function *error_pos* in pid_motor_test.py. The step response can be plot by launching the file PID_evaluation_plot.py in parallel to the movement. Don't forget to modify the motor name for which the data that is collected in the fonction *get_current_position*.
+A command in position is sent to the motor and we watch its step response with the function *error_pos* in pid_motor_test.py. The step response can be plot by launching the file PID_evaluation_plot.py in parallel to the movement. 
+> **Note**
+> Don't forget to modify the motor name for which the data are collected, in the fonction *get_current_position*.
 
 The first step is to chose proportionnal gain. For this, the gain has been increased until the error in the final position is low while having a reasonable overshoot. 
 
@@ -73,7 +75,7 @@ zooming in:
 
 ![pid_zoom](../images/pid_graph_zoom.png)
 
-This methode alllow to see the impact of all the engines on a typical throw.
+This methode alllow to see the impact of all the motor together on a typical throw.
 
 
 ## Setup PID
@@ -83,4 +85,7 @@ The pid of the right arm can by modify in the file change_PID.py using *change_P
 For instance ```change_PID([[64,10,100],[64,10,100],[20,0,0],[64,10,100],[20,0,0],[20,0,0],[20,0,0]]) ```
 
 There is also the possibility to know the current arm right PID of reachy with *print_PID* in change_PID.py 
+
+> **Warning**
+> PIDs are store in RAM, so the setup need to be done each time the motors reset.
 
