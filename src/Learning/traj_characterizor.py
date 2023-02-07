@@ -2,15 +2,17 @@
 # we need to characterize the trajectories.
 # To do so, we'll need to define a trajectory with a vector and a throw point.
 
-# A ameliorer :
-# On regarde à partir du 600e pt de la traj pour trouver le pt de relachement
-
 import numpy as np
 import matplotlib.pyplot as plt
+from reachy_sdk import ReachySDK
 
 
 class TrajectoryCharacterizor:
-    def __init__(self, joint_orders, nb_points=25, ply_deg=2):
+    """
+    Taking a trajectory as obtained with get_traj.py, this class compute
+    """
+    def __init__(self, joint_orders, reachY, nb_points=25, ply_deg=2):
+        self.reachy = reachY
         self.joint_orders = joint_orders
         self.nb_points = nb_points
         self.ply_deg = ply_deg
@@ -23,6 +25,7 @@ class TrajectoryCharacterizor:
         self.coeffs = None
         self.ffit = None
         self.fderiv = None
+        self.velocity = None
 
     def __find_release_index(self):
         for i in range(len(self.joint_orders) - 600):
@@ -35,7 +38,7 @@ class TrajectoryCharacterizor:
 
     def __joints_to_cartesian(self):
         for order in self.joint_orders[self.release_index - self.nb_points:self.release_index]:
-            self.traj.append(reachy.r_arm.forward_kinematics({cle: order[cle] for cle in
+            self.traj.append(self.reachy.r_arm.forward_kinematics({cle: order[cle] for cle in
                                                               ["r_shoulder_pitch", "r_shoulder_roll", "r_arm_yaw",
                                                                "r_elbow_pitch", "r_forearm_yaw", "r_wrist_pitch",
                                                                "r_wrist_roll"]}.values()))
@@ -43,22 +46,6 @@ class TrajectoryCharacterizor:
         self.Y = np.array([p[1, 3] for p in self.traj])
         self.Z = np.array([p[2, 3] for p in self.traj])
         return self.X, self.Y, self.Z
-
-    def plot_3d_trajectory(self):
-        if self.X is None:
-            print("You need to process the trajectory first")
-            return
-        fig = plt.figure()
-        ax = fig.add_subplot(projection='3d')
-        ax.scatter(self.X, self.Y, self.Z, label='Courbe')
-        minax = min([min(self.X), min(self.Y), min(self.Z)])
-        manax = max([max(self.X), max(self.Y), max(self.Z)])
-        manax += 0.1
-        minax -= 0.1
-        plt.xlim(minax, manax)
-        plt.ylim(minax, manax)
-        ax.set_zlim(minax, manax)
-        plt.show()
 
     def __fit_polynomial(self):
         self.coeffs = (np.polyfit(self.time, self.X, self.ply_deg),  # X=f(t)
@@ -91,34 +78,53 @@ class TrajectoryCharacterizor:
         plt.title('Z=f1(t)')
         plt.show()
 
+    def plot_3d_trajectory(self):
+        if self.X is None:
+            print("You need to process the trajectory first")
+            return
+        fig = plt.figure()
+        ax = fig.add_subplot(projection='3d')
+        ax.scatter(self.X, self.Y, self.Z, label='Courbe')
+        # draw 3D vector from self.release_point to self.release_point + self.velocity
+        ax.quiver(self.X[-1], self.Y[-1], self.Z[-1], self.velocity[0], self.velocity[1], self.velocity[2], length=0.1,
+                  normalize=True)
+        minax = min([min(self.X), min(self.Y), min(self.Z)])
+        manax = max([max(self.X), max(self.Y), max(self.Z)])
+        manax += 0.1
+        minax -= 0.1
+        plt.xlim(minax, manax)
+        plt.ylim(minax, manax)
+        ax.set_zlim(minax, manax)
+        plt.show()
+
     def process(self):
         self.__find_release_index()
         self.__joints_to_cartesian()
         # self.plot_3d_trajectory()
         self.__fit_polynomial()
         # self.plot_fitted_curve()
+
         release_point = self.X[-1], self.Y[-1], self.Z[-1]
         # print("Release point: ", release_point)
-        print(self.fderiv[0])
+        # print(self.fderiv[0])
         # print("X.shape :", self.X.shape)
         # print("ffit", self.ffit[0](self.X).shape)
-        velocity = self.fderiv[0](self.time[-1]), self.fderiv[1](self.time[-1]), self.fderiv[2](self.time[-1])
-        return velocity, release_point
+        self.velocity = self.fderiv[0](self.time[-1]), self.fderiv[1](self.time[-1]), self.fderiv[2](self.time[-1])
+        return self.velocity, release_point
 
 
 if __name__ == "__main__":
     import os
 
     curr_dir = os.getcwd()
-    if curr_dir != '/home/reachy/dynamic_reachy/src':
-        print("Please run this script from the ~/dynamic_reachy/src/ folder")
+    if curr_dir != '/home/reachy/dynamic_reachy/src/Learning':
+        print("Please run this script from the ~/dynamic_reachy/src/Learning folder")
         exit(0)
-
-    from reachy_sdk import ReachySDK
 
     reachy = ReachySDK('localhost')
 
-    t = TrajectoryCharacterizor(joint_orders=np.load('../traj/traj_coralie3.npz', allow_pickle=True)["traj"],
+    t = TrajectoryCharacterizor(joint_orders=np.load('../../../traj/traj_coralie3.npz', allow_pickle=True)["traj"],
+                                reachY=reachy,
                                 nb_points=25,
                                 ply_deg=3)
     v, pt = t.process()
