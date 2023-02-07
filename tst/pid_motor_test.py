@@ -56,7 +56,7 @@ def error():
         reachy.turn_off_smoothly('reachy')
 
 def error_pos():
-    #position from where to where reachy makes the move
+    #position to where reachy makes the move
     pos = [0, 0, 0, 0, -30, 0, 0, 0]
 
     #record error

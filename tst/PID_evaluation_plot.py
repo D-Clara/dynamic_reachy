@@ -8,6 +8,7 @@ def get_current_position(Reachy):
     """
     Get the current position of the right arm
     """
+    # Recovery of the current position of the requested motor
     return time.time()-TIME, Reachy.r_arm.r_forearm_yaw.present_position
 
 
