@@ -10,7 +10,7 @@ from reachy_sdk.trajectory.interpolation import InterpolationMode
 import sys 
 import os
 sys.path.append(os.path.abspath("/home/reachy/dynamic_reachy/src"))
-from angles_correction import actif_angles_correction_empty_hand, actif_angles_correction_no_empty_hand 
+from angles_correction import actif_angles_correction 
 
 reachy = ReachySDK('localhost')
 INIT_POS = [-0.0, 0.0, 0.0, -45.0, 0.0, 0.0, 0.0, -10.40]
