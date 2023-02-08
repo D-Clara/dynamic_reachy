@@ -16,6 +16,9 @@ reachy = ReachySDK('localhost')
 INIT_POS = [-0.0, 0.0, 0.0, -45.0, 0.0, 0.0, 0.0, -10.40]
 
 def find_position_for_elbow_torque():
+    """
+    Find the angle to give to reach the desired angle for the elbow
+    """
     pos = np.copy(INIT_POS)
     final_pos = np.copy(INIT_POS)
     pos[3] -= 10
@@ -38,6 +41,10 @@ def find_position_for_elbow_torque():
         reachy.turn_off_smoothly('reachy')
 
 def elbow_error_evaluate(final_angle):
+    """
+    Determine errors of the correction for the elbow
+    :param param1 angle to give to reach the desired angle
+    """
     pos = np.copy(INIT_POS)
     final_pos = np.copy(INIT_POS)
     pos[3] -= 10
@@ -62,6 +69,9 @@ def elbow_error_evaluate(final_angle):
         reachy.turn_off_smoothly('reachy')
 
 def find_position_for_shoulder_torque():
+    """
+    Find the angle to give to reach the desired angle for the shoulder
+    """
     pos = np.copy(INIT_POS)
     final_pos = np.copy(INIT_POS)
     pos[0] -= 10
@@ -85,6 +95,10 @@ def find_position_for_shoulder_torque():
         reachy.turn_off_smoothly('reachy')
 
 def shoulder_error_evaluate(final_angle):
+    """
+    Determine errors of the correction for the shoulder
+    :param param1 angle to give to reach the desired angle
+    """
     pos = np.copy(INIT_POS)
     final_pos = np.copy(INIT_POS)
     pos[0] -= 10

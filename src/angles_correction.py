@@ -8,12 +8,25 @@ M_ARM = 0.6
 
 
 def sign(i):
+    """
+    Determine the sign of a number
+    :param param1 number
+    """
     if i >= 0:
         return 1
     else:
         return -1
 
 def actif_angles_correction(shoulder_angle, elbow_angle, empty_hand=True, object_weight=0, init_torque_shoulder=0, init_torque_elbow=0):
+    """
+    Determine the sign of a number
+    :param param1 desired shoulder angle
+    :param param2 desired elbow angle
+    :param param3 if the hand is empty or not
+    :param param4 the weight of the object in the and if necessary
+    :param param5 necessary added shoulder torque to catch the ball 
+    :param param6 necessary added elbow torque to catch the ball 
+    """
     if elbow_angle > 0:
         elbow_angle = 0
     if empty_hand:

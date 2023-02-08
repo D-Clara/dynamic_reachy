@@ -21,6 +21,9 @@ ERR2 = []
 time.sleep(1)
 
 def setup_pid():
+    """
+    Set the pids of each motor
+    """
     reachy.r_arm.r_shoulder_pitch.pid = (PID[0][0], PID[0][1], PID[0][2])
     reachy.r_arm.r_shoulder_roll.pid = (PID[1][0], PID[1][1], PID[1][2])
     reachy.r_arm.r_arm_yaw.pid = (PID[2][0], PID[2][1], PID[2][2])
@@ -35,6 +38,9 @@ def setup_pid():
         print(f"{j.name}: PID={j.pid}")
 
 def error():
+    """
+    Handling the pids by making small movements
+    """
     #position from where to where reachy makes the move
     pos = [0, 0, 0, 0, 0, 0, -30, 0]
     pos2 = [0, 0, 0, 0, 0, 0, 30, 0]
@@ -56,6 +62,9 @@ def error():
         reachy.turn_off_smoothly('reachy')
 
 def error_pos():
+    """
+    Request to go to a position to get the step response with PID_evaluation_plot.py
+    """
     #position from where to where reachy makes the move
     pos = [0, 0, 0, 0, -30, 0, 0, 0]
 

@@ -22,6 +22,10 @@ JS = []
 
 #error during a movement
 def error(filename):
+    """
+    Record error for each motor during a throw
+    :param param1 name of the filename of the throw in the directory traj 
+    """
     reachy = ReachySDK('localhost')
 
     #change pid value
