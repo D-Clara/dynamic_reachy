@@ -46,3 +46,4 @@ Contains different test implemented during the project.
 - `pid_motor_test.py` : different pid tests for motors one by one
 - `pid_traj_error_record.py` : global pids test for all the motor on one throw
 - `show_traj_error.py` : plot error for each moteur for one throw
+- `torque_control.py` : find relationship between torque and position gap
