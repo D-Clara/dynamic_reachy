@@ -123,7 +123,7 @@ if __name__ == "__main__":
 
     reachy = ReachySDK('localhost')
 
-    t = TrajectoryCharacterizor(joint_orders=np.load('../../../traj/traj_coralie3.npz', allow_pickle=True)["traj"],
+    t = TrajectoryCharacterizor(joint_orders=np.load('../../traj/traj_coralie3.npz', allow_pickle=True)["traj"],
                                 reachY=reachy,
                                 nb_points=25,
                                 ply_deg=3)

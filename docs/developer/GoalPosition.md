@@ -20,3 +20,6 @@ The first one was that the goal position was not updated directly on the joint s
 A solution to that was to catch the goal position when the server send the goal position from unity to the robot
 
 The thrid one was that the goal position was updated but not at the same frequency as the current position so we can't record it as we record the current position.
+
+
+[Back to summary](README.md)

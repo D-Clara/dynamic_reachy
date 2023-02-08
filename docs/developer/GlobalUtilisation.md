@@ -110,7 +110,7 @@ python3 reproduce_traj.py
 
 ## Emergency stop
 
-In case of ermergency you can stop the robot by turning off all the motors or you can also stop the sdk server.
+In case of ermergency you can stop the robot by __turning off all the motors__ or you can also __stop the sdk server__.
 
 Normally, if you kill (by Ctrl+c) a running function that make the robot move, the robot will stop moving and become smoothly.
 If there is a problem and the robot don't become smootly you can also use the file __*turn_off.py*__ in the *src/* directory.
@@ -119,6 +119,5 @@ If there is a problem and the robot don't become smootly you can also use the fi
 python3 turn_off.py
 ```
 
-sss
-
+[Back to summary](README.md)
 
