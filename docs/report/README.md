@@ -17,7 +17,7 @@ and then we will use teleoperation to construct a dataset of trajectories, and f
 
 During the project, we have studied the precision of Reachy's motors, and tried different ways to work on them such as PID tuning and gravity torque compensation.
 We also used teleoperation to make a demonstration of beer pong game with pre-registered trajectories during the **Aperobot** event.
-Finally, we studied the causes of the non-reproducibility of the trajectories.
+Finally, we studied the causes of the non-repeatability of the trajectories.
 
 ## 🔎 Implemented approach
 
