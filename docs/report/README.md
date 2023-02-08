@@ -28,6 +28,6 @@ Add links to relevant sections to your user documentation and developer document
 
 ## 📈 Analysis of results
 
-* Computing of the torque caused by garvity
+* Computing of the torque caused by gravity
 * Analysis of the impact of PID
-* Quantification of the non-repeatability and parallel with motor's temperatures.
+* [Quantification of the non-repeatability and parallel with motor's temperatures](./Resultats.md)
