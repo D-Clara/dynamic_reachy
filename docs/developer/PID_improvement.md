@@ -14,13 +14,13 @@ Problem with the 2 wrist motors
 
 While trying to do the test for the wrist, a problem occurred, no matter the pid values chosen, the 2 motors of the wrist shake quite strongly mainly bumps when the motors are in 0° position. 
 
-https://user-images.githubusercontent.com/74452893/217235552-c3513cd5-967e-47f8-95c6-e3eb48d6a5f4.mp4
+https://user-images.githubusercontent.com/74452893/217632740-7753e373-3267-4654-a45c-2b9840cb0ade.mp4
 
-https://user-images.githubusercontent.com/74452893/217235544-f9e9d0ef-f5c1-4a00-95a0-34a616ffc570.mp4
+https://user-images.githubusercontent.com/74452893/217632699-ded9f84f-1f62-4645-9163-2c4d73c3cd4f.mp4
 
 So we wanted to check that the engine was working well. The same action was done with a dynamixel setup connect directly to the motor and no shaking was observed. 
 
-https://user-images.githubusercontent.com/74452893/217235982-14a15ce0-40cf-47b5-9d28-995db0e69523.mp4
+https://user-images.githubusercontent.com/74452893/217632053-05c2dbdd-923d-4df6-9876-764cfd4b1bed.mp4
 
 We came to the conclusion that it must be a problem of tension drop at the end of the arm preventing good control of the wrist.
 
