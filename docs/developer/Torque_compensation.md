@@ -45,7 +45,7 @@ To determine this relationship, for each motor and for different angles and init
 
 This video illuste one acquisition of data for the elbow motor:
 
-https://user-images.githubusercontent.com/74452893/217071843-9d4e4f5d-e662-413b-b864-dcdaed446088.mp4
+https://user-images.githubusercontent.com/74452893/217633009-0b73f876-a153-4b84-9079-11698ef6765c.mp4
 
 ### Elbow motor
 
@@ -76,8 +76,7 @@ To obtain the error of the compensation, *elbow_error_evaluate* and *shoulder_er
 
 One part of a test for shoulder motor is showed in this video:
 
-https://user-images.githubusercontent.com/74452893/217072010-5d00ea56-0097-4767-8c16-d345bbe48841.mp4
-
+https://user-images.githubusercontent.com/74452893/217632971-2394e19d-4792-488a-a148-36c15d7a0932.mp4
 
 **All data for pratical application are include in the [document](../images/torques.ods).**
 
