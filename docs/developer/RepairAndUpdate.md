@@ -82,3 +82,5 @@ In each of these directories, we have :
 - retrieved modifications from git (git pull)
 - build new sources from new data in ROS (only for directories in *reachy_ws/*)(colb)
 - source the modifications (sb)
+
+[Back to summary](README.md)
