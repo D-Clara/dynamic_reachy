@@ -42,3 +42,8 @@ Below, a explanation about most relevant files.
 Contains different test implemented during the project.
 
 - `test_dynamixel.py` : different tests directly on the dynamixel motors
+- `PID_evaluation_plot.py` : plot step response for PID
+- `pid_motor_test.py` : different pid tests for motors one by one
+- `pid_traj_error_record.py` : global pids test for all the motor on one throw
+- `show_traj_error.py` : plot error for each moteur for one throw
+- `torque_control.py` : find relationship between torque and position gap
