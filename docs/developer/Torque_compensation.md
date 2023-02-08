@@ -41,15 +41,15 @@ The torque to be given to the motor to compensate the weight is the opposite of 
 
 It is not possible to control the reachy arm directly with the torques. The method is to give it a higher position than the desired one so that it reaches the desired value. So it is necessary to determine the relationship between the additional angle to be given in relation to the desired torque. The throw being only in one plane we decided to do it only for the elbow and the shoulder.
 
-To determine this relationship, for each motor and for different angles and initial torques, the objective is to turn the motor by 10°. Increasingly large arm movements arm movements are made until the desired value is reached and the gap between desired angle and angle to give are collected.
+To determine this relationship, for each motor and for different angles and initial torques, the objective is to turn the motor by 10°. Increasingly large arm movements are made until the desired value is reached and the gap between desired angle and angle to give are collected.
 
-This video illuste one acquisition of data for the elbow motor:
+This video illustrate one acquisition of data for the elbow motor:
 
 https://user-images.githubusercontent.com/74452893/217633009-0b73f876-a153-4b84-9079-11698ef6765c.mp4
 
 ### Elbow motor
 
-To obtain the gap between desired angle and angle to give, *find_position_for_elbow_torque* need to be used.
+To obtain the gap between desired angle and angle to give, *find_position_for_elbow_torque* needs to be used.
 
 This graph has been obtained:
 
@@ -60,7 +60,7 @@ $eps_{elbow} = -1.54423*\tau_{elbow}-0.504432$
 
 ### Shoulder motor
 
-To obtain the gap between desired angle and angle to give, *find_position_for_shoulder_torque* need to be used.
+To obtain the gap between desired angle and angle to give, *find_position_for_shoulder_torque* needs to be used.
 
 This graph has been obtained:
 
@@ -82,6 +82,6 @@ https://user-images.githubusercontent.com/74452893/217632971-2394e19d-4792-488a-
 
 ## Usage
 
-To correct angles to compensate the weight, the function *actif_angles_correction* in angles_correction.py need to be used. It takes in parameter desired shoulder angle, desired elbow angle, if the hand is empty or not and if necessary the weight of the object in the hand. It return the shoulder and elbow angles that that must be given to compensate.  
+To correct angles to compensate the weight, the function *actif_angles_correction* in angles_correction.py need to be used. It takes in parameter desired shoulder angle, desired elbow angle, if the hand is empty or not and if necessary the weight of the object in the hand. It returns the shoulder and elbow angles that that must be given to compensate.  
 
 [Back to summary](README.md)
