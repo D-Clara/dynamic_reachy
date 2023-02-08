@@ -8,8 +8,6 @@ from reachy_sdk import ReachySDK
 from reachy_sdk.trajectory import goto
 from reachy_sdk.trajectory.interpolation import InterpolationMode
 
-from constants_and_flags import incr, decr, flagg
-
 # Global variables
 RECORD_FREQUENCY = 100
 SAVE_DIRECTORY_PATH = '/home/reachy/dynamic_reachy/traj/'
