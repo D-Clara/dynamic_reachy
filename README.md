@@ -17,7 +17,7 @@ and generate his own trajectories, thanks to a database made with VR teleoperati
 The search of precision in the reproduction of a movement led us to study the PID parameters of the robot, and 
 constraints such as the torque from gravity applied on the joints.
 
-In parallel, the need of reproducibility for the repetition of one trajectory brought us to search about the causes of 
+In parallel, the need of repeatability for the reproduction of one trajectory brought us to search about the causes of 
 these different behaviours with the same order.
 
 ## 🚀 Quickstart
