@@ -62,14 +62,11 @@ def error():
         reachy.turn_off_smoothly('reachy')
 
 def error_pos():
-<<<<<<< HEAD
     """
     Request to go to a position to get the step response with PID_evaluation_plot.py
     """
-    #position from where to where reachy makes the move
-=======
     #position to where reachy makes the move
->>>>>>> 68b90d27503eda62f4e51c09322554ebc8467cef
+
     pos = [0, 0, 0, 0, -30, 0, 0, 0]
 
     #record error
