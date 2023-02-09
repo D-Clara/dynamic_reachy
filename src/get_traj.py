@@ -19,7 +19,7 @@ FILENAME_COMMENT = 'test'
 FILENAME_PREFIX = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
 
 
-saving = False  # variable globale déclarée à l'extérieur de toutes les méthodes de la classe
+saving = False 
 
 
 def __init__():
