@@ -46,7 +46,7 @@ Moreover, the mean point is `[21.0  12.1]`, which is closer to the teleoperation
 
 ## Analysis and Comparison
 
-![alt text](./All_plot.png)
+![alt text](../images/All_plot.png)
 
 Finally, we can compare those three ways together in a complete graph.
 
