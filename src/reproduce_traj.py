@@ -17,12 +17,19 @@ GOAL_POSITION = 'goal'
 FILENAME = '/home/reachy/dynamic_reachy/traj/2023-02-08_10:22:00_test.npz'
 RECORD_FREQUENCY = 100
 PREPROCESSING = True
-TYPE_OF_POSITION = GOAL_POSITION
+TYPE_OF_POSITION = PRESENT_POSITION
 
 
 
 
 def pre_traitement_couple(filename, method=PRESENT_POSITION, init_torque_shoulder=0, init_torque_elbow=0):
+    '''
+    Preprocess the trajectory to correct the angles
+    :param filename: the name of the file to read
+    :param method: the method to use to reproduce the trajectory (PRESENT_POSITION ou GOAL_POSITION)
+    :param init_torque_shoulder: the initial torque of the shoulder
+    :param init_torque_elbow: the initial torque of the elbow
+    '''
     traj = np.load(filename, allow_pickle=True)[method]
     for t in traj:
         [t[0], t[3]] = actif_angles_correction(t[0], t[3], init_torque_shoulder, init_torque_elbow)
@@ -30,6 +37,11 @@ def pre_traitement_couple(filename, method=PRESENT_POSITION, init_torque_shoulde
 
 
 def goal_preprocessing(filename,reachy):
+    '''
+    Preprocess the trajectory to get the goal position
+    :param filename: the name of the file to read
+    :param reachy: the reachy object
+    '''
     file_load = np.load(filename, allow_pickle=True)
     times = file_load["times"]
     times[0] = 0
@@ -134,8 +146,8 @@ def reproduce_traj_bis(filename, reachy, method=GOAL_POSITION, preprocessing=Fal
         
 
 if __name__ == '__main__':
+    
     robot = ReachySDK('localhost')
-
     if TYPE_OF_POSITION == PRESENT_POSITION:
         reproduce_traj(FILENAME, robot, preprocessing=PREPROCESSING)
     else:

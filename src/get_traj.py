@@ -42,11 +42,15 @@ def get_positions():
 def add_goal(element):
     """
     Add a goal to the trajectory
+    :param element: the goal position to add
     """
     global goal
     goal.append(element)
     
 def start_saving():
+    '''
+    Start saving the trajectory
+    '''
     dictionary = {
     "save": True
     }
@@ -58,6 +62,9 @@ def start_saving():
 
 
 def stop_saving():
+    '''
+    Stop saving the trajectory
+    '''
     dictionary = {
     "save": False
     }
@@ -69,6 +76,12 @@ def stop_saving():
 
 
 def save_goal(goal_pos,times):
+    '''
+    Save the goal position
+    :param goal_pos: the goal positions
+    :param times: the times to reach the goal
+    '''
+
     dictionary = {
     "goal": goal_pos, "times" : times
     }
@@ -79,6 +92,9 @@ def save_goal(goal_pos,times):
         outfile.write(json_object)
 
 def load_goal():
+    '''
+    Load the goal position
+    '''
     with open(GOAL_JSON_PATH) as json_file:
         data = json.load(json_file)
     return data['goal'], data['times']
@@ -87,6 +103,9 @@ def load_goal():
 
 
 def is_saving():
+    '''
+    Check if the trajectory is being saved
+    '''
     with open(SAVE_JSON_PATH) as json_file:
         data = json.load(json_file)
     return data['save']
@@ -120,58 +139,6 @@ def record_trajectory(filename):
             goal, times = load_goal()
             np.savez_compressed(filePath, traj=traj, pos=pos, goal=goal, times=times)
             break
-
-
-
-
-
-
-
-
-# def is_pose_reachable(pose, is_left_arm=True, precision=0.005, verbose=True):
-#     """
-#     Check if a pose is reachable by the arm.
-#     :param pose: the pose to check
-#     :param is_left_arm: if True, check the left arm, else check the right arm
-#     :param precision: the precision to use to check if the pose is reachable
-#     :param verbose: if True, print some debug messages
-#     :return: True if the pose is reachable, False otherwise
-#     """
-#     angles = []
-#     joints = {}
-
-#     try:
-#         if is_left_arm:
-#             angles = reachy.l_arm.inverse_kinematics(pose)
-#             real_pose = reachy.l_arm.forward_kinematics(angles)
-#             joints = {joint: pos for joint, pos in zip(reachy.l_arm.joints.values(), angles)}
-#         else:
-#             angles = reachy.r_arm.inverse_kinematics(pose)
-#             real_pose = reachy.r_arm.forward_kinematics(angles)
-#             joints = {joint: pos for joint, pos in zip(reachy.r_arm.joints.values(), angles)}
-#         # Testing if the forward kinematics matches
-#         for iy, ix in np.ndindex(pose.shape):
-#             if abs(pose[iy, ix] - real_pose[iy, ix]) > precision:
-#                 if verbose:
-#                     get_logger().warning(f"Unreachable pose: {pose}")
-#                 return False, joints
-
-#         # Testing if the angular limits are respected
-#         for j in joints.keys():
-#             limits = angle_limits[j.name]
-#             if verbose:
-#                 get_logger().warning(f"angle limits of {j.name}={limits}")
-#             angle = joints[j]*np.pi/180.0
-#             valid = is_valid_angle(angle, limits)
-#             if not valid:
-#                 if verbose:
-#                     get_logger().warning(f"{j.name} are {limits}rad, asked for unreachable angle: {angle}rad")
-#                 return False, joints
-#     except Exception:
-#         get_logger().error(traceback.format_exc())
-#         return False, joints
-
-#     return True, joints
 
 
 
