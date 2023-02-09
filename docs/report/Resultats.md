@@ -48,6 +48,8 @@ Moreover, the mean point is `[21.0  12.1]`, which is closer to the teleoperation
 
 ![alt text](../images/All_plot.png)
 
+![real result](../images/feuille_final.jpg)
+
 Finally, we can compare those three ways together in a complete graph.
 
 Firstly, throws with the goal position are much far, but this is caused by a problem of getting the gripper position (see the [details of this problem](../developer/GoalPosition.md)), that result with a drift of the x-axis
