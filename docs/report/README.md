@@ -19,15 +19,10 @@ During the project, we have studied the precision of Reachy's motors, and tried 
 We also used teleoperation to make a demonstration of beer pong game with pre-registered trajectories during the **Aperobot** event.
 Finally, we studied the causes of the non-repeatability of the trajectories.
 
-## 🔎 Implemented approach
+## 🔎 Implemented approach and analysis of results
 
-Describe your **approach** and how you proceeded to solve the problems reported by the client
- the work to solve this problem.
-
-Add links to relevant sections to your user documentation and developer documentation but do not duplicate information.
-
-## 📈 Analysis of results
-
-* Computing of the torque caused by gravity
-* Analysis of the impact of PID
+* [Computing of the torque caused by gravity](../developer/TorqueCompensation.md)
+* [Analysis of the impact of PID](../developer/PidImprovement.md)
 * [Quantification of the non-repeatability and parallel with motor's temperatures](./Resultats.md)
+* [Recording and use of the goal position](../developer/GoalPosition.md)
+* [Recording and reproduction of a trajectory](../developer/GlobalUtilisation.md)
