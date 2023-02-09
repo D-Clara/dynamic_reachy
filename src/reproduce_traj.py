@@ -7,14 +7,19 @@ from angles_correction import actif_angles_correction
 from get_traj import load_goal
 
 
-# MODIFY HERE
-FILENAME = '/home/reachy/dynamic_reachy/traj/2023-02-08_10:22:00_test.npz'
-RECORD_FREQUENCY = 100
-PREPROCESSING = True
-
 DEBUT = [-6.57, -4.99, 0.84, -79.16, -8.36, -4.7, 11.29, -44.79]
 PRESENT_POSITION = 'pos'
 GOAL_POSITION = 'goal'
+
+# MODIFY HERE
+#FILENAME = '/home/reachy/dynamic_reachy/traj/2023-02-01_08:28:47_test.npz'
+#FILENAME = "/home/reachy/dynamic_reachy/traj/2023-02-08_11:42:54_test.npz"
+FILENAME = '/home/reachy/dynamic_reachy/traj/2023-02-08_10:22:00_test.npz'
+RECORD_FREQUENCY = 100
+PREPROCESSING = True
+TYPE_OF_POSITION = GOAL_POSITION
+
+
 
 
 def pre_traitement_couple(filename, method=PRESENT_POSITION, init_torque_shoulder=0, init_torque_elbow=0):
@@ -32,7 +37,6 @@ def goal_preprocessing(filename,reachy):
     traj = file_load['goal']
 
     t = -0.18
-    #actual_open = pos[0][7] < -12
     gripper = [pos[0][7] for i in range(len(times))]
     print(pos[0][7])
 
@@ -76,12 +80,10 @@ def reproduce_traj(filename, reachy, method=PRESENT_POSITION, preprocessing=True
         reachy.turn_on('r_arm')
         if not(preprocessing):
             traj = np.load(filename, allow_pickle=True)[method]
-        # traj = np.load(filename, allow_pickle=True)[method]
         else:
             traj = pre_traitement_couple(filename, method, init_torque_shoulder, init_torque_elbow)
-        print(traj)
-        #traj = goal_preprocessing(filename,reachy)
-        print(len(traj), len(traj))
+        #print(traj)
+        #print(len(traj), len(traj))
         # reproduce the trajectory
         goto({joint: pos for joint, pos in zip(reachy.r_arm.joints.values(), DEBUT)}, duration=2.0)
         goto({joint: pos for joint, pos in zip(reachy.r_arm.joints.values(), traj[0])}, duration=2.0)
@@ -133,11 +135,12 @@ def reproduce_traj_bis(filename, reachy, method=GOAL_POSITION, preprocessing=Fal
 
 if __name__ == '__main__':
     robot = ReachySDK('localhost')
-    #FILENAME = '/home/reachy/dynamic_reachy/traj/2023-02-01_08:28:47_test.npz'
-    FILENAME = "/home/reachy/dynamic_reachy/traj/2023-02-08_11:42:54_test.npz"
-    #reproduce_traj_bis(FILENAME, robot)
-    reproduce_traj(FILENAME, robot, preprocessing=True)
-    #goal_preprocessing([1],robot)
+
+    if TYPE_OF_POSITION == PRESENT_POSITION:
+        reproduce_traj(FILENAME, robot, preprocessing=PREPROCESSING)
+    else:
+        reproduce_traj_bis(FILENAME, robot)
+    
 
 
 

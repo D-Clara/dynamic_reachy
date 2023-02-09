@@ -103,6 +103,11 @@ RECORD_FREQUENCY = 100
 PREPROCESSING = True
 ```
 
+two different functions in the file :
+- *reproduce_traj* : to reproduce the trajectory with current position
+- *reproduce_traj_bis* : to reproduce the trajectory with goal position
+
+
 To run the file use this command (if you are in the *src* directory) :
 ```
 python3 reproduce_traj.py
@@ -118,6 +123,10 @@ If there is a problem and the robot don't become smootly you can also use the fi
 ```
 python3 turn_off.py
 ```
+
+
+:Warning: To use these functions you have to replace the reachy_sdk_server.py in the reachy_ws by the reachy_sdk_server.py in the dynamic_reachy/src/data folder.
+
 
 [Back to summary](README.md)
 

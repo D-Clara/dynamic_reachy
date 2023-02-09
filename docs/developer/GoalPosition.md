@@ -27,7 +27,7 @@ We encountered several problems in retrieving these goal positions:
 The trajectory reproduced by the robot's arm from the goal position corresponds well to the movement obtained in VR but the landing point does not correspond because it is difficult to correctly set the delay.
 
 
-
+:Warning: To use the goal posistion you have to replace the reachy_sdk_server.py in the reachy_ws by the reachy_sdk_server.py in the dynamic_reachy/src/data folder.
 
 
 

@@ -3,8 +3,8 @@
 
 - [Files organisation](FilesOrg.md)
 - [Global utilisation](GlobalUtilisation.md)
-- [Torque compensation](Torque_compensation.md)
+- [Torque compensation](TorqueCompensation.md)
 - [Repair and update](RepairAndUpdate.md)
 - [Goal Position in teleoperation](GoalPosition.md)
-- [PID improvement](PID_improvement.md)
+- [PID improvement](PidImprovement.md)
 
