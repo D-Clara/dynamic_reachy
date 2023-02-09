@@ -39,6 +39,6 @@ these different behaviours with the same order.
 |       |                                                                                                                                                     |
 |:----------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
 | 💼 **Client**                |                                                                   Pollen Robotics                                                                   |
-| 🔒 **Confidentiality**       |                                                             **Public** or **Private**                                                               |
+| 🔒 **Confidentiality**       |                                                                      **Public**                                                               |
 | ⚖️ **License**               |                                                                         MIT                                                                         |
 | 👨‍👨‍👦 **Authors**               | [FORNES Guillaume](https://github.com/GuiFornes/), [DIEUDONNE Clara](https://github.com/D-Clara/), [DEPLANNE Coralie](https://github.com/Drenayaz/) 
