@@ -78,7 +78,7 @@ One part of a test for shoulder motor is showed in this video:
 
 https://user-images.githubusercontent.com/74452893/217632971-2394e19d-4792-488a-a148-36c15d7a0932.mp4
 
-**All data for pratical application are include in the [document](../images/torques.ods).**
+**All data for pratical application are include in the [document](../images/torque.ods).**
 
 ## Usage
 
