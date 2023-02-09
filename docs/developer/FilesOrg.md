@@ -27,7 +27,7 @@ docs
 Contains all the source code of our project. 
 See the [user documentation](../user/README.md) to know which files to launch.
 
-Below, a explanation about most relevant files.
+Below, an explanation about most relevant files.
 - `angles_correction.py` : contains correction functions about gravity and torque compensation.
 - `api.py` : script to run the api
 - `change_PID.py` : script to change the PID parameters
