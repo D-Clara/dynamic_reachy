@@ -28,6 +28,6 @@ Finally, we studied the causes of the non-repeatability of the trajectories.
 
 ## 📈 Analysis of results
 
-* [Quantification of the non-repeatability and parallel with motor's temperatures](./Resultats.md)
+* [Quantification of the non-repeatability](./Resultats.md)
 * [Analysis of the catching of the ball on the support at the beginning of the throw](./BallCatching.md)
 
