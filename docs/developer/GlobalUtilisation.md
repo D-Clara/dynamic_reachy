@@ -94,6 +94,7 @@ Different parameters can be change in the file :
 - FILENAME : the absolute path of the wanted trajectory (.npz)
 - RECORD_FREQUENCY : the recording frequency (usally 100)
 - PREPROCESSING : *True* or *False*, to activate or not the preprocessing that compensates for the force of gravity 
+- TYPE_OF_POSITION : *GOAL_POSITION* or *CURRENT_POSITION*, to use the goal position or the current position
 
 Here is an example : 
 
@@ -101,6 +102,7 @@ Here is an example :
 FILENAME = '/home/reachy/dynamic_reachy/traj/2023-01-30_17:41:16_test.npz'
 RECORD_FREQUENCY = 100
 PREPROCESSING = True
+TYPE_OF_POSITION = GOAL_POSITION
 ```
 
 two different functions in the file :
