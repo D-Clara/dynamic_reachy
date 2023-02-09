@@ -36,12 +36,9 @@ these different behaviours with the same order.
 
 ## 🔍 About this project
 
-|       |        |
-|:----------------------------:|:-----------------------------------------------------------------------:|
-| 💼 **Client**                |  Pollen Robotics                                            |
-| 🔒 **Confidentiality**       | **Public** or **Private** *(1)*                                         |
-| ⚖️ **License**               |  [Choose a license](https://choosealicense.com/) *(1)*                  |
-| 👨‍👨‍👦 **Authors**               |  [FORNES Guillaume](https://github.com/GuiFornes/), [DIEUDONNE Clara](https://github.com/D-Clara/), [DEPLANNE Coralie](https://github.com/Drenayaz/) 
-
-
-*(1) Refer to your client to make a choice. Then update the repository accordingly: the visibility in the settings and replace the [LICENSE](./LICENSE) file.*
+|       |                                                                                                                                                     |
+|:----------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
+| 💼 **Client**                |                                                                   Pollen Robotics                                                                   |
+| 🔒 **Confidentiality**       |                                                                      **Public**                                                               |
+| ⚖️ **License**               |                                                                         MIT                                                                         |
+| 👨‍👨‍👦 **Authors**               | [FORNES Guillaume](https://github.com/GuiFornes/), [DIEUDONNE Clara](https://github.com/D-Clara/), [DEPLANNE Coralie](https://github.com/Drenayaz/) 

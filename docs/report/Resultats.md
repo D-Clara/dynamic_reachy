@@ -58,5 +58,7 @@ Taking this into account, this method should be, as expected, the most accurate.
 
 The second method is therefore the worst. Gravity torque compensation alone is not sufficient, and the ball meanly falls closer compared to the one of the teleoperation take.
 
-Finally, we can see the third method as an melioration of the second one, with the aim to tend towards the perfect case that would be the first method with a good ball release point.
-As we failed to find a solution to reduce the drift af the release point in the *goal position* method, this method is currently the most conclusive method.
+We can see the third method as an melioration of the second one, with a smaller variance and a mean point closer to the teleoperation take. 
+
+Finally, we can conclude that the first method could be the best, but we failed to find a solution the problem of the recuperation of gripper's motor position without time drift.
+Therfore, the third method is currently the more conclusive one, and the correction brought is allows to get closer and more precise in the reproduction of a teleoperation movement.
